@@ -1,0 +1,6 @@
+@Npv.Api_HostAddress = http://localhost:5010
+
+GET {{Npv.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

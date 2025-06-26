@@ -1,0 +1,71 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+
+<main class="main">
+  <div class="content">
+    <div class="left-side">
+      <h2>Hello, {{ title }}</h2>    <br/>
+      
+      <form #npvForm="ngForm" (ngSubmit)="onSubmit(npvForm)" novalidate>
+
+        <label>
+          Cash Flows (comma separated):<br/>
+          <input type="text"  name="cashFlowsInput" pattern="^(\d+)(,\d+)*$"  placeholder="e.g. 1000,2000,3000" required
+            [(ngModel)]="cashFlowsInput" 
+            (input)="clearErrors(npvForm)">
+        </label><br/>
+
+        <label>
+          Lower Bound Rate (%):<br/>
+          <input type="number" name="lowerRate" [(ngModel)]="lowerRate" required 
+          (input)="clearErrors(npvForm)">
+        </label><br/>
+
+        <label>
+          Upper Bound Rate (%):<br/>
+          <input type="number" name="upperRate" [(ngModel)]="upperRate" required [min]="lowerRate" 
+          (input)="clearErrors(npvForm)">
+        </label><br/>
+
+        <label>
+          Increment (%):<br/>
+          <input type="number" name="increment" [(ngModel)]="increment" required min="0.01" step="0.01" 
+          (input)="clearErrors(npvForm)">
+        </label><br/>
+
+        <button type="submit">Calculate</button>
+
+      @if (error !== '') {
+        <p style="color: red;">{{ error }}</p>
+      }
+
+    </form>
+    
+    </div>
+
+
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div class="right-side">
+      <app-chart></app-chart>
+    </div>
+  </div>
+</main>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+<router-outlet />
